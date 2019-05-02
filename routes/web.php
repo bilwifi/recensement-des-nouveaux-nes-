@@ -14,3 +14,37 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/testAuth', function () {
+    return App\Models\Declaration::getDeclarationByEtablissement(1);
+})->name('test');
+
+Auth::routes();	
+
+Route::get('/home', 'HomeController@index')->name('home');
+// Route pour les agents de la commune
+Route::get('/agent-commune', 'Auth\AgentCommuneController@showLoginForm');
+Route::post('/agent-commune', 'Auth\AgentCommuneController@login')->name('login_agent_commune');
+
+
+// Route pourles utilisateur des établissement 
+Route::get('/{etablissement}/login', 'Auth\UserEtablissementController@showLoginForm')->name('user_etablissement');
+Route::post('/{etablissement}/login', 'Auth\UserEtablissementController@login')->name('login_user_etablissement');
+
+Route::name('etablissement.')->group(function () {
+		Route::get('/redirect','Etablissements\DashboardController@index')->name('index');
+		Route::get('/{etablissement}/accueil','Etablissements\DashboardController@acceuil')->name('accueil');
+		Route::get('/{etablissement}/create','Etablissements\DashboardController@create_declaration')->name('create_declaration');
+		Route::post('/{etablissement}/create','DeclarationController@store')->name('create_declaration');
+		Route::get('/{etablissement}/edit/{declaration}','Etablissements\DashboardController@edit_declaration')->name('edit_declaration');
+		Route::post('/{etablissement}/edit/{declaration}','DeclarationController@store')->name('edit_declaration');
+
+	});
+
+
+
+Route::get('/{etablissement}', function(App\Models\Etablissement $etablissement){
+	return redirect()->route('user_etablissement',$etablissement->slug);
+});
+
+

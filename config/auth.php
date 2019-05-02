@@ -46,6 +46,16 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'agents_commune' => [
+            'driver' => 'session',
+            'provider' => 'agents_commune',
+        ],
+
+        'users_etablissement' => [
+            'driver' => 'session',
+            'provider' => 'users_etablissement',
+        ],
     ],
 
     /*
@@ -69,6 +79,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'agents_commune' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Agents_commune::class,
+        ],
+
+        'users_etablissement' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Users_etablissement::class,
         ],
 
         // 'users' => [
