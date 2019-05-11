@@ -1,3 +1,4 @@
+
 @extends('etablissements.layouts.master')
 @section('content')
 <div class="container">
@@ -32,7 +33,7 @@
 	                                    <div class="form-group row">
 	                                        <label for="mereNom" class="col-3 control-label col-form-label">Nom</label>
 	                                        <div class="col-8">
-	                                            <input type="text" class="form-control" name="mereNom" id="mereNom" placeholder="">
+	                                            <input type="text" class="form-control" name="mereNom" id="mereNom" placeholder="" required="required">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
@@ -51,19 +52,19 @@
 	                                    <div class="form-group row">
 	                                        <label for="mereLieuNaissance" class="col-3 control-label col-form-label">Lieu de naissance</label>
 	                                        <div class="col-8">
-	                                            <input type="text" class="form-control" name="mereLieuNaissance" id="mereLieuNaissance" placeholder="">
+	                                            <input type="text" class="form-control" name="mereLieuNaissance" id="mereLieuNaissance" placeholder="" required="required">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <label for="mereDateNaissance" class="col-3 control-label col-form-label">Date de naissance</label>
 	                                        <div class="col-8">
-	                                            <input type="Date" class="form-control" name="mereDateNaissance" id="mereDateNaissance" placeholder="">
+	                                            <input type="Date" class="form-control" name="mereDateNaissance" id="mereDateNaissance" placeholder="" required="required">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <label for="mereNationalite" class="col-3 control-label col-form-label">Nationalité</label>
 	                                        <div class="col-8">
-	                                            <input type="text" class="form-control" name="mereNationalite" id="mereNationalite" placeholder="">
+	                                            <input type="text" class="form-control" name="mereNationalite" id="mereNationalite" placeholder="" required="required">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
@@ -164,7 +165,7 @@
 	                                	<div class="form-group row">
 	                                        <label for="enfantNom" class="col-3 control-label col-form-label">Nom</label>
 	                                        <div class="col-8">
-	                                            <input type="text" class="form-control" name="enfantNom" id="enfantNom" placeholder="">
+	                                            <input type="text" class="form-control" name="enfantNom" id="enfantNom" placeholder="" required="required">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
@@ -182,20 +183,20 @@
 	                                    <div class="form-group row">
 	                                        <label for="enfantSexe" class="col-3 control-label col-form-label">Sexe</label>
 	                                        <div class="col-8">
-	                                            <input type="text" class="form-control" name="enfantSexe" id="enfantSexe" placeholder="">
+	                                            <input type="text" class="form-control" name="enfantSexe" id="enfantSexe" placeholder="" required="required">
 	                                        </div>
 	                                    </div>
 
 	                                    <div class="form-group row">
 	                                        <label for="enfantLieuNaissance" class="col-3 control-label col-form-label">Lieu de naissance</label>
 	                                        <div class="col-8">
-	                                            <input type="text" class="form-control" name="enfantLieuNaissance" id="enfantLieuNaissance" placeholder="">
+	                                            <input type="text" class="form-control" name="enfantLieuNaissance" id="enfantLieuNaissance" placeholder="" required="required">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
 	                                        <label for="enfantDateNaissance" class="col-3 control-label col-form-label">Date de naissance</label>
 	                                        <div class="col-8">
-	                                            <input type="Date" class="form-control" name="enfantDateNaissance" id="enfantDateNaissance" placeholder="">
+	                                            <input type="Date" class="form-control" name="enfantDateNaissance" id="enfantDateNaissance" placeholder="" required="required">
 	                                        </div>
 	                                    </div>
 	                                </div>

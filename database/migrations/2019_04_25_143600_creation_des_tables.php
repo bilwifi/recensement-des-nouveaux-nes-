@@ -110,6 +110,8 @@ class CreationDesTables extends Migration
             $table->string('password');
             $table->unsignedInteger('idetablissement');
             $table->unsignedInteger('idrole');
+            $table->enum('profil',['agent','admin']);
+            $table->boolean('isAdmin');
             $table->timestamps();
 
 
@@ -136,6 +138,7 @@ class CreationDesTables extends Migration
             $table->string('cituation_amoureuse_parent');
             $table->string('commentaire');
             $table->enum('statut',[0,1,2]);
+            $table->dateTime('date_envoi')->nullable();
             $table->timestamps();
 
             

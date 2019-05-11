@@ -167,6 +167,8 @@ class DeclarationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Declaration::destroy($id);
+        // Flashy
+        return redirect()->back();
     }
 }

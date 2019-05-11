@@ -19,7 +19,7 @@ class Agents_commune extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'idpersonne', 'idcommune','pseudo', 'password',
+        'idpersonne', 'idcommune','pseudo', 'password','profil'
     ];
 
     /**
@@ -30,4 +30,16 @@ class Agents_commune extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+
+
+
+    public static function getUsersByCommune($idcommune){
+        return self::UsersByCommune($idcommune)->join('personnes','personnes.idpersonne','agents_communes.idpersonne')->get();
+    } 
+
+
+    public static function scopeUsersByCommune($query,$idcommune){
+        return $query->where('idcommune',$idcommune);
+    }
 }

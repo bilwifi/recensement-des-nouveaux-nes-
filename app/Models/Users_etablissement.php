@@ -18,7 +18,7 @@ class Users_etablissement extends Authenticatable
      * @var array
      */
    protected $fillable = [
-        'idpersonne', 'pseudo', 'password','idrole',
+        'idpersonne', 'pseudo', 'password','profil','isAdmin','idetablissement',
     ];
 
     /**
@@ -29,4 +29,13 @@ class Users_etablissement extends Authenticatable
     protected $hidden = [
         'password', 
     ];
+
+    public static function getUsersByEtablissement($idetablissement){
+        return self::UsersByEtablissement($idetablissement)->join('personnes','personnes.idpersonne','users_etablissements.idpersonne')->get();
+    } 
+
+
+    public static function scopeUsersByEtablissement($query,$idetablissement){
+        return $query->where('idetablissement',$idetablissement);
+    }
 }

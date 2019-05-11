@@ -1,13 +1,13 @@
 <?php
 
-namespace App\DataTables\Etablissements;
+namespace App\DataTables\Communes;
 
 use App\Models\Declaration;
 use Yajra\DataTables\Services\DataTable;
 
 class ListeNotificationsDataTable extends DataTable
 {
-    /**
+       /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
@@ -17,18 +17,19 @@ class ListeNotificationsDataTable extends DataTable
     {
         return datatables($query)
             ->addColumn('action', function($query){
-                $disable ='test';
-                if ($this->user->profil != 'admin' && $query->iddeclarant != $this->user->idpersonne) {
-                    $disable = 'disabled';
-                }
+                // $disable ='test';
+                // if ($this->user->profil != 'admin' && $query->iddeclarant != $this->user->idpersonne) {
+                //     $disable = 'disabled';
+                // }
 
 
-                return '<a href="'.route('etablissement.edit_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'">Edit</a>'
-                .
-                '<a href="'.route('etablissement.send_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-success '.$disable.'">Envoyer</a>'
-                .
-                '<a href="'.route('etablissement.delete_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-danger '.$disable.'">Supprimer</a>'
-                ;
+                // return '<a href="'.route('etablissement.edit_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'">Edit</a>'
+                // .
+                // '<a href="'.route('etablissement.send_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-success '.$disable.'">Envoyer</a>'
+                // .
+                // '<a href="'.route('etablissement.delete_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-danger '.$disable.'">Supprimer</a>'
+                // ;
+                return null;
             });
     }
 
@@ -40,7 +41,7 @@ class ListeNotificationsDataTable extends DataTable
      */
     public function query(Declaration $model)
     {
-        return $model::getDeclarationByEtablissement($this->idetablissement);
+        return $model::getDeclarationByCommune();
     }
 
     /**
@@ -66,12 +67,13 @@ class ListeNotificationsDataTable extends DataTable
     {
         return [
             'iddeclaration',
+            'etablissement.nom',
             'mere.nom',
             'enfant.prenom',
             'enfant.sexe',
             'enfant.dateNaiss',
             'declarant.nom',
-            'statut'
+            'date_envoi'
         ];
     }
 
@@ -90,6 +92,6 @@ class ListeNotificationsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Etablissements/ListeNotifications_' . date('YmdHis');
+        return 'Communes/ListeNotifications_' . date('YmdHis');
     }
 }

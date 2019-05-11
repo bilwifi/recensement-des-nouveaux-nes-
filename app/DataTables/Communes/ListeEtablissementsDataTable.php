@@ -1,11 +1,11 @@
 <?php
 
-namespace App\DataTables\Etablissements;
+namespace App\DataTables\Communes;
 
-use App\Models\Declaration;
+use App\Models\Etablissement;
 use Yajra\DataTables\Services\DataTable;
 
-class ListeNotificationsDataTable extends DataTable
+class ListeEtablissementsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -17,17 +17,14 @@ class ListeNotificationsDataTable extends DataTable
     {
         return datatables($query)
             ->addColumn('action', function($query){
-                $disable ='test';
-                if ($this->user->profil != 'admin' && $query->iddeclarant != $this->user->idpersonne) {
-                    $disable = 'disabled';
-                }
-
-
-                return '<a href="'.route('etablissement.edit_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'">Edit</a>'
+                 return '<button type="button" class="edit-modal btn btn-info" data-toggle="modal" data-target="#editModal"  data-info="'.$query->idetablissement.','.$query->nom.','.$query->abbr.'">
+                  <span class="fa fa-edit"></span> Edit
+                </button>'
                 .
-                '<a href="'.route('etablissement.send_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-success '.$disable.'">Envoyer</a>'
-                .
-                '<a href="'.route('etablissement.delete_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-danger '.$disable.'">Supprimer</a>'
+                '<a  href="'.route('commune.crud_etablissements.destroy',$query->idetablissement).'" class="btn btn-danger">
+                  <span class="fa fa-delete"></span> Supprimer
+                </button>'
+               
                 ;
             });
     }
@@ -38,9 +35,9 @@ class ListeNotificationsDataTable extends DataTable
      * @param \App\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Declaration $model)
+    public function query(Etablissement $model)
     {
-        return $model::getDeclarationByEtablissement($this->idetablissement);
+        return $model::getEtablissements();
     }
 
     /**
@@ -65,13 +62,11 @@ class ListeNotificationsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'iddeclaration',
-            'mere.nom',
-            'enfant.prenom',
-            'enfant.sexe',
-            'enfant.dateNaiss',
-            'declarant.nom',
-            'statut'
+            'idetablissement',
+            'nom',
+            'abbr',
+            'slug',
+            'pseudo',
         ];
     }
 
@@ -82,7 +77,6 @@ class ListeNotificationsDataTable extends DataTable
             'order' => [[1,'Asc']]
         ];
     }
-
     /**
      * Get filename for export.
      *
@@ -90,6 +84,6 @@ class ListeNotificationsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Etablissements/ListeNotifications_' . date('YmdHis');
+        return 'Communes/ListeEtablissements_' . date('YmdHis');
     }
 }

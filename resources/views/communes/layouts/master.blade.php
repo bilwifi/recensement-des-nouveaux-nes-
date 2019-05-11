@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="ltr">
 <head>
@@ -31,9 +30,9 @@
 
   <body>
 
-@include('etablissements.layouts.partials._header')
-{{-- @include('etablissements.layouts.partials._header_img') --}}
-@include('etablissements.layouts.partials._nav')
+@include('communes.layouts.partials._header')
+{{-- @include('communes.layouts.partials._header_img') --}}
+@include('communes.layouts.partials._nav')
 <br>
     <div class="container-fluid clearfix">
         <div class="container">
@@ -41,7 +40,7 @@
         </div>
 @yield('content')
     </div>
-@include('etablissements.layouts.partials._footer')
+@include('communes.layouts.partials._footer')
 
 
 
