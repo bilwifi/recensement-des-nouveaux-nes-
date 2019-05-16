@@ -16,6 +16,7 @@
     @yield('stylesheet1')
         <!-- Custom CSS -->
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+     <link href="{{ asset('bootstrap/icons/font-awesome/css/fontawesome-all.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -32,7 +33,7 @@
   <body>
 
 @include('etablissements.layouts.partials._header')
-{{-- @include('etablissements.layouts.partials._header_img') --}}
+@include('etablissements.layouts.partials._header_img')
 @include('etablissements.layouts.partials._nav')
 <br>
     <div class="container-fluid clearfix">
@@ -52,6 +53,7 @@
     <!-- this page js -->
 
 @stack('scripts')
+@include('flashy::message')
 
   </body>
 

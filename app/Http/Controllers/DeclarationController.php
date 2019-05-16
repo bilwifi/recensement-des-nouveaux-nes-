@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Personne;
 use App\Models\Declaration;
-
+use Flashy;
 class DeclarationController extends Controller
 {
     /**
@@ -120,8 +120,8 @@ class DeclarationController extends Controller
             ],
             $declaration
         );
-
-        return 'ok';
+        Flashy::success('Dossier crée avec succès');
+        return redirect()->back();
     }
 
     /**
@@ -168,7 +168,7 @@ class DeclarationController extends Controller
     public function destroy($id)
     {
         Declaration::destroy($id);
-        // Flashy
+        Flashy::success('Dossier supprimé');
         return redirect()->back();
     }
 }

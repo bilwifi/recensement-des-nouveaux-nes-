@@ -175,9 +175,9 @@
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">
-	                                        <label for="enfantPrenom" class="col-3 control-label col-form-label">Prenom</label>
+	                                        <label for="enfantPrenom" class="col-3 control-label col-form-label">Prenom *</label>
 	                                        <div class="col-8">
-	                                            <input type="text" class="form-control" name="enfantPrenom" id="enfantPrenom" placeholder="">
+	                                            <input type="text" class="form-control required" name="enfantPrenom" id="enfantPrenom" placeholder="" required="">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group row">

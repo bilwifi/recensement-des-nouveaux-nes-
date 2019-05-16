@@ -18,11 +18,11 @@ class ListeEtablissementsDataTable extends DataTable
         return datatables($query)
             ->addColumn('action', function($query){
                  return '<button type="button" class="edit-modal btn btn-info" data-toggle="modal" data-target="#editModal"  data-info="'.$query->idetablissement.','.$query->nom.','.$query->abbr.'">
-                  <span class="fa fa-edit"></span> Edit
+                  <span class="fa fa-edit"></span>
                 </button>'
                 .
                 '<a  href="'.route('commune.crud_etablissements.destroy',$query->idetablissement).'" class="btn btn-danger">
-                  <span class="fa fa-delete"></span> Supprimer
+                  <i class=" fas fa-trash-alt"></i>
                 </button>'
                
                 ;
@@ -50,7 +50,7 @@ class ListeEtablissementsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '150px'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -62,11 +62,38 @@ class ListeEtablissementsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'idetablissement',
+            // 'idetablissement',
             'nom',
-            'abbr',
-            'slug',
-            'pseudo',
+            'abbr'=>[
+                        'name'=>'abbr',
+                        'data' => 'abbr',
+                        'title' => 'Abbréviation',
+                        'searchable' => false,
+                        'orderable' => false,
+                        // 'render' => 'pap',
+                        'exportable' => true,
+                        'printable' => true,
+                    ],
+            'slug'=>[
+                        'name'=>'slug',
+                        'data' => 'slug',
+                        'title' => 'Slug',
+                        'searchable' => false,
+                        'orderable' => false,
+                        // 'render' => 'pap',
+                        'exportable' => true,
+                        'printable' => true,
+                    ],
+            'pseudo'=>[
+                        'name'=>'pseudo',
+                        'data' => 'pseudo',
+                        'title' => 'Administrateur',
+                        'searchable' => false,
+                        'orderable' => false,
+                        // 'render' => 'pap',
+                        'exportable' => true,
+                        'printable' => true,
+                    ],
         ];
     }
 

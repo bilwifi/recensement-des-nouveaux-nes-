@@ -39,4 +39,7 @@ class AgentCommuneController extends Controller
     // public function login(Request $request){
     // 	dd($request);
     // }
+    public function logout(){
+        \Auth::logout();
+    }
 }

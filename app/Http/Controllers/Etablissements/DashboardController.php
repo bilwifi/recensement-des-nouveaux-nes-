@@ -15,12 +15,13 @@ use App\DataTables\Etablissements\ListeNotificationsDataTable;
 use App\DataTables\Etablissements\ListeUtilisateursEtablissementDataTable;
 use DB;
 use Hash;
+use Flashy;
 
 class DashboardController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('auth:users_etablissement');
+		$this->middleware(['auth:users_etablissement','checkUserRole','checkAuth']);
 	}
 
 	public function index(){
@@ -40,21 +41,26 @@ class DashboardController extends Controller
 	}
 
 	public function create_declaration(Etablissement $etablissement){
-		return view('etablissements.create_declaration',compact('etablissement'));
+		return view('etablissements.form_declaration',compact('etablissement'));
 	}
 
 	public function edit_declaration(Etablissement $etablissement, Declaration $declaration){
 		$declaration = DeclarationController::edit($declaration->iddeclaration);
-		return view('etablissements.edit_declaration',compact('declaration','etablissement'));
+
+		return view('etablissements.form_edit_declaration',compact('declaration','etablissement'));
 	}
 	public function send_declaration(Etablissement $etablissement, Declaration $declaration){
 		$declaration->statut = 2;
 		$declaration->date_envoi = DB::raw('NOW()');
 		$declaration->save();
+        Flashy::success('Dossier envoyé avec succès');
+
 		return redirect()->back();
 	}
 	public function destroy_declaration(Etablissement $etablissement, Declaration $declaration){
 		$declaration->destroy($declaration->iddeclaration);
+        Flashy::success('Dossier supprimé');
+
 		return redirect()->back();
 	}
 
@@ -77,9 +83,9 @@ class DashboardController extends Controller
 									'profil' => $request->user_profil,
 									'idetablissement' => auth()->user()->idetablissement,
 								]);
-		// 
-		// FLASHYYYYYYYYYYYYYYYYY
-		// ------------------------------------------
+
+        Flashy::success('Utilisateur crée avec succès');
+
 		return redirect()->back();
 	}
 
@@ -91,8 +97,8 @@ class DashboardController extends Controller
 	}
 	public function updateUser(UpdateUSerRequest $request){
 		$user = Users_etablissement::find($request->iduser)->update(['profil'=>$request->profil]);
-		// Flashyyy
-		// ---------------
+        Flashy::success('Utilisateur mis en jour avec succès');
+		
 		return redirect()->back();
 	}
 }

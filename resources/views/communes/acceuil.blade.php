@@ -2,13 +2,15 @@
 @include('partials.includes.dataTables.dataTables')
 @include('partials.includes.dataTables.buttons')
 @section('content')
-<div class="container">
-	<div class="card">
-	  <div class="card-body">
+<div class='content'>
+	<h3>Accueil</h3>
+	<hr>
+	<h5>Notifications réçus</h5>
+	<br>
+</div>
+	  <div>
 		{!!$dataTable->table() !!}
 	  </div>
-	</div>
-</div>	
 @stop
 @push('scripts')
 {!!$dataTable->scripts() !!}

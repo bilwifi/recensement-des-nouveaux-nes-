@@ -45,7 +45,7 @@ class EtablissementController extends Controller
                                     'abbr' => $request->abbr
                                 ]); 
 
-        // Flashy::success('Etudiant ajouter avec succès');
+        Flashy::success('Action effectuée avec succès');
         return redirect()->back();     
     }
 
@@ -93,7 +93,7 @@ class EtablissementController extends Controller
      */
     public function destroy($id)
     {
-        dd('p');
+        // dd('p');
         Etablissement::destroy($id);
         // Flashy
         return redirect()->back();

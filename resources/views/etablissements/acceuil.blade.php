@@ -3,10 +3,14 @@
 @include('partials.includes.dataTables.buttons')
 @section('content')
 <div class="container">
-	<div class="card">
-	  <div class="card-body">
+	<div>
+		<h3>Accueil</h3>
+		<hr>
+		<p>Notifications en cours</p>
+		<br>
+	</div>
+	<div >
 		{!!$dataTable->table() !!}
-	  </div>
 	</div>
 </div>	
 @stop

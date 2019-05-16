@@ -6,8 +6,8 @@
 	<button type="button" class="addModal btn btn-info" data-toggle="modal" data-target="#addModal">
   		 <span class="fa fa-plus"> </span> Nouveau Utilisateur
 	</button><br><br>
-	<div class="card">
-	  <div class="card-body">
+	<div >
+	  <div >
 		{!!$dataTable->table() !!}
 	  </div>
 	</div>

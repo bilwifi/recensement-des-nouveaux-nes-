@@ -25,7 +25,7 @@ class DashboardController extends Controller
    
     public function __construct()
     {
-        $this->middleware('auth:agents_commune');
+        $this->middleware(['auth:agents_commune','checkAuth']);
     }
 
 

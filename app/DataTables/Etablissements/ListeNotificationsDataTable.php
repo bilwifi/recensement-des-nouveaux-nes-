@@ -23,11 +23,13 @@ class ListeNotificationsDataTable extends DataTable
                 }
 
 
-                return '<a href="'.route('etablissement.edit_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'">Edit</a>'
+                return 
+                '<a href="'.route('etablissement.send_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-success '.$disable.'"><i class=" fas fa-share-square"></i></a>'
+                
                 .
-                '<a href="'.route('etablissement.send_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-success '.$disable.'">Envoyer</a>'
+                '<a href="'.route('etablissement.edit_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'"><i class="fas fa-edit"></i></a>'
                 .
-                '<a href="'.route('etablissement.delete_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-danger '.$disable.'">Supprimer</a>'
+                '<a href="'.route('etablissement.delete_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-danger '.$disable.'"><i class=" fas fa-trash-alt"></i></a>'
                 ;
             });
     }
@@ -53,7 +55,7 @@ class ListeNotificationsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '150px'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -65,13 +67,86 @@ class ListeNotificationsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'iddeclaration',
-            'mere.nom',
-            'enfant.prenom',
-            'enfant.sexe',
-            'enfant.dateNaiss',
-            'declarant.nom',
-            'statut'
+            // 'iddeclaration'=>[
+            //             'name'=>'lib',
+            //             'data' => 'lib',
+            //             'title' => 'Profil',
+            //             'searchable' => false,
+            //             'orderable' => false,
+            //             // 'render' => 'pap',
+            //             'exportable' => true,
+            //             'printable' => true,
+            //         ],
+            'mere.nom'=>[
+                        'name'=>'mere.nom',
+                        'data' => 'mere.nom',
+                        'title' => 'Nom de la mère',
+                        'searchable' => false,
+                        'orderable' => false,
+                        // 'render' => 'pap',
+                        'exportable' => true,
+                        'printable' => true,
+                    ],
+            'enfant.prenom'=>[
+                        'name'=>'enfant.prenom',
+                        'data' => 'enfant.prenom',
+                        'title' => 'Prénom de l\'enfant',
+                        'searchable' => false,
+                        'orderable' => false,
+                        // 'render' => 'pap',
+                        'exportable' => true,
+                        'printable' => true,
+                    ],
+            // 'enfant.sexe'=>[
+            //             'name'=>'enfant.sexe',
+            //             'data' => 'enfant.sexe',
+            //             'title' => 'Sexe',
+            //             'searchable' => false,
+            //             'orderable' => false,
+            //             // 'render' => 'pap',
+            //             'exportable' => true,
+            //             'printable' => true,
+            //         ],
+            'enfant.dateNaiss'=>[
+                        'name'=>'enfant.dateNaiss',
+                        'data' => 'enfant.dateNaiss',
+                        'title' => 'Date de naissance',
+                        'searchable' => false,
+                        'orderable' => false,
+                        // 'render' => 'pap',
+                        'exportable' => true,
+                        'printable' => true,
+                    ],
+            'declarant.nom'=>[
+                        'name'=>'declarant.nom',
+                        'data' => 'declarant.nom',
+                        'title' => 'Declarant',
+                        'searchable' => false,
+                        'orderable' => false,
+                        // 'render' => 'pap',
+                        'exportable' => true,
+                        'printable' => true,
+                    ],
+            'created_at'=>[
+                        'name'=>'created_at',
+                        'data' => 'created_at',
+                        'title' => 'Date de création',
+                        'searchable' => false,
+                        'orderable' => false,
+                        // 'render' => 'pap',
+                        'exportable' => true,
+                        'printable' => true,
+                    ],
+             // 'statut'=>[
+             //            'name'=>'statut',
+             //            'data' => 'statut',
+             //            'title' => 'Etat',
+             //            'searchable' => false,
+             //            'orderable' => false,
+             //            // 'render' => 'pap',
+             //            'exportable' => true,
+             //            'printable' => true,
+             //        ],
         ];
     }
 
