@@ -95,7 +95,7 @@
               </div>
               <div class="form-group">
                   <label for="user_prenom"  class="control-label">Prenom</label>
-                  <div class="col-sm-12">
+                  <div class="col-sm-12" required>
                       <input type="text"  class="form-control" id="user_prenom" name="user_prenom"  maxlength="50" >
                   </div>
               </div>

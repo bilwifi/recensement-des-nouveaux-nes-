@@ -17,7 +17,7 @@ class ListeEtablissementsDataTable extends DataTable
     {
         return datatables($query)
             ->addColumn('action', function($query){
-                 return '<button type="button" class="edit-modal btn btn-info" data-toggle="modal" data-target="#editModal"  data-info="'.$query->idetablissement.','.$query->nom.','.$query->abbr.'">
+                 return '<button type="button" class="edit-modal btn btn-info" data-toggle="modal" data-target="#editModal"  data-info="'.$query->idetablissement.','.$query->nom.','.$query->abbr.','.$query->idadresse.'">
                   <span class="fa fa-edit"></span>
                 </button>'
                 .

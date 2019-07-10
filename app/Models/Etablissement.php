@@ -11,7 +11,7 @@ class Etablissement extends Model
     protected $primaryKey = 'idetablissement';
 	public $timestamps = false;
     protected $fillable = [
-         'nom', 'abbr','pseudo'
+         'nom', 'abbr','pseudo','idadresse'
     ];
 
     public function getRouteKeyName(){
@@ -36,7 +36,8 @@ class Etablissement extends Model
     				'etablissements.idetablissement',
     				'etablissements.nom',
     				'etablissements.abbr',
-    				'etablissements.slug',
+                    'etablissements.slug',
+    				'etablissements.idadresse',
     				'users_etablissements.pseudo',
     			]);
     }

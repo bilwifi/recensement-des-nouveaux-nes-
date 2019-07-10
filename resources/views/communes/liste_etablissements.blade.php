@@ -90,7 +90,7 @@
             <div class="form-group">
                 <label for="adresse"  class="control-label">Adresse</label>
                 <div class="col-sm-12">
-                    <input type="text"  class="form-control" id="adresse" name="adresse"  maxlength="50" >
+                    <input type="text"  class="form-control" id="adresse" name="adresse"  maxlength="50" required="">
                 </div>
             </div>
             <div id="user-etablissement">
@@ -211,12 +211,14 @@
 	function fillmodalData(details){
 			$('#idetablissement').val(details[0]);
 			$('#nom').val(details[1]);
-			$('#abbr').val(details[2]);
+      $('#abbr').val(details[2]);
+			$('#adresse').val(details[3]);
 			}
 
 	function resetmodalData(){
 			$('#nom').val('');
-			$('#abbr').val('');
+      $('#abbr').val('');
+			$('#adresse').val('');
 			}
 
 

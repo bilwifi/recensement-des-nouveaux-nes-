@@ -1,12 +1,12 @@
 <?php
 
 namespace App\DataTables\Communes;
-
 use App\Models\Declaration;
 use Yajra\DataTables\Services\DataTable;
 
-class ListeNotificationsDataTable extends DataTable
+class ArchivesDataTable extends DataTable
 {
+    
        /**
      * Build DataTable class.
      *
@@ -21,17 +21,9 @@ class ListeNotificationsDataTable extends DataTable
                 if ($this->user->profil != 'admin' && $query->iddeclarant != $this->user->idpersonne) {
                     $disable = 'disabled';
                 }
-// view_declaration
 
-                return 
-                '<a href="'.route('commune.view_declaration',[$query->iddeclaration]).'" class="delete-modal btn btn-info '.$disable.'"><i class="fas fa-eye"></i></a>'
-                
-                .'<a href="'.route('commune.edit_declaration',[$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'"><i class="fas fa-edit"></i></a>'
-                .
-                '<a href="'.route('commune.archive_declaration',[$query->iddeclaration]).'" class="delete-modal btn btn-success '.$disable.'"><i class="fas fa-check"></i></a>'
-                .
-                '<a href="#" class="delete-modal btn btn-danger '.$disable.'"><i class="fas fa-trash"></a>'
-                ;
+
+                return '<a href="'.route('commune.view_declaration',[$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'"><i class="fas fa-eye"></i></a>';
                 // return null;
             });
     }
@@ -44,7 +36,7 @@ class ListeNotificationsDataTable extends DataTable
      */
     public function query(Declaration $model)
     {
-        return $model::getDeclarationByCommune();
+        return $model::getDeclarationByCommuneArchive();
     }
 
     /**
@@ -57,7 +49,7 @@ class ListeNotificationsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '180px'])
+                    ->addAction(['width' => '80px'])
                     ->parameters($this->getBuilderParameters());
     }
 

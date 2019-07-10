@@ -17,7 +17,7 @@ class ListeUtilisateursDataTable extends DataTable
     {
         return datatables($query)
             ->addColumn('action', function($query){
-                return '<button type="button" class="edit-modal btn btn-info" data-toggle="modal" data-target="#editModal"  data-info="'.$query->idagents_commune.','.$query->profil.'">
+                return '<button type="button" class="edit-modal btn btn-info" data-toggle="modal" data-target="#editModal"  data-info="'.$query->profil.'">
                   <span class="fa fa-edit"></span> Edit
                 </button>';
             });

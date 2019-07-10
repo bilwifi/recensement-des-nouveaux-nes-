@@ -101,7 +101,7 @@ class DeclarationController extends Controller
         );
 
         $declarant = Personne::find($request->iddeclarant);
-
+        $stat = auth('agents_commune') ? 2 : 1;
         $declaration = [
             'idmere' => $mere->idpersonne,
             'idpere' => $pere->idpersonne,
@@ -112,7 +112,8 @@ class DeclarationController extends Controller
             'cituation_amoureuse_parent'=>$request->cituation_amoureuse_parent,
             'commentaire'=>$request->commentaire,
         ];  
-
+        // dump($declaration);
+        
         $declaration = Declaration::updateOrCreate(
             [
                 'idmere'=>$mere->idpersonne,
@@ -120,6 +121,7 @@ class DeclarationController extends Controller
             ],
             $declaration
         );
+        // dd($declaration);
         Flashy::success('Dossier crée avec succès');
         return redirect()->back();
     }

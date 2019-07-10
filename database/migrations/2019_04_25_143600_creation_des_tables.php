@@ -13,67 +13,67 @@ class CreationDesTables extends Migration
      */
     public function up()
     {
-        Schema::create('communes', function (Blueprint $table) {
-            $table->increments('idcommune');
-            $table->string('nom')->unique();
+        // Schema::create('communes', function (Blueprint $table) {
+        //     $table->increments('idcommune');
+        //     $table->string('nom')->unique();
 
-            $table->engine = 'InnoDB';
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
+        //     $table->engine = 'InnoDB';
+        //     $table->charset = 'utf8';
+        //     $table->collation = 'utf8_unicode_ci';
             
-        });
-        Schema::create('quartiers', function (Blueprint $table) {
-            $table->increments('idquartier');
-            $table->string('nom');
-            $table->unsignedInteger('idcommune');
+        // });
+        // // Schema::create('quartiers', function (Blueprint $table) {
+        //     $table->increments('idquartier');
+        //     $table->string('nom');
+        //     $table->unsignedInteger('idcommune');
 
-            $table->foreign('idcommune')
-                  ->references('idcommune')->on('communes');
+        //     $table->foreign('idcommune')
+        //           ->references('idcommune')->on('communes');
 
-            $table->engine = 'InnoDB';
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-        });
-        Schema::create('avenues', function (Blueprint $table) {
-            $table->increments('idavenue');
-            $table->string('lib');
-            $table->unsignedInteger('idquartier');
+        //     $table->engine = 'InnoDB';
+        //     $table->charset = 'utf8';
+        //     $table->collation = 'utf8_unicode_ci';
+        // });
+        // Schema::create('avenues', function (Blueprint $table) {
+        //     $table->increments('idavenue');
+        //     $table->string('lib');
+        //     $table->unsignedInteger('idquartier');
             
-            $table->foreign('idquartier')
-                  ->references('idquartier')->on('quartiers');
+        //     $table->foreign('idquartier')
+        //           ->references('idquartier')->on('quartiers');
 
-            $table->engine = 'InnoDB';
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-        });
-        Schema::create('adresses', function (Blueprint $table) {
-            $table->increments('idadresse');
-            $table->string('num');
-            $table->unsignedInteger('idavenue');
+        //     $table->engine = 'InnoDB';
+        //     $table->charset = 'utf8';
+        //     $table->collation = 'utf8_unicode_ci';
+        // });
+        // Schema::create('adresses', function (Blueprint $table) {
+        //     $table->increments('idadresse');
+        //     $table->string('num');
+        //     $table->unsignedInteger('idavenue');
             
-            $table->foreign('idavenue')
-                  ->references('idavenue')->on('avenues');
+        //     $table->foreign('idavenue')
+        //           ->references('idavenue')->on('avenues');
 
-            $table->engine = 'InnoDB';
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
-        });
+        //     $table->engine = 'InnoDB';
+        //     $table->charset = 'utf8';
+        //     $table->collation = 'utf8_unicode_ci';
+        // });
         Schema::create('personnes', function (Blueprint $table) {
             $table->increments('idpersonne');
-            $table->string('numIdN');
+            $table->string('numIdN')->nullable();
             $table->string('nom');
-            $table->string('postnom');
+            $table->string('postnom')->nullable();
             $table->string('prenom');
             $table->enum('sexe',['M','F']);
-            $table->string('lieuNaissance');
-            $table->date('dateNaissance');
-            $table->unsignedInteger('idadresse');
-            $table->string('telephone');
-            $table->string('profession');
-            $table->string('nationalite');
+            $table->string('lieuNaissance')->nullable();
+            $table->date('dateNaissance')->nullable();
+            $table->text('idadresse')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('profession')->nullable();
+            $table->string('nationalite')->nullable();
            
-            $table->foreign('idadresse')
-                  ->references('idadresse')->on('adresses');
+            // $table->foreign('idadresse')
+            //       ->references('idadresse')->on('adresses');
 
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
@@ -83,11 +83,11 @@ class CreationDesTables extends Migration
             $table->increments('idetablissement');
             $table->string('nom');
             $table->string('abbr');
-            $table->unsignedInteger('idadresse');
+            $table->text('idadresse');
             $table->string('slug')->unique();
             
-            $table->foreign('idadresse')
-                  ->references('idadresse')->on('adresses');
+            // $table->foreign('idadresse')
+            //       ->references('idadresse')->on('adresses');
 
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
@@ -109,9 +109,9 @@ class CreationDesTables extends Migration
             $table->string('pseudo');
             $table->string('password');
             $table->unsignedInteger('idetablissement');
-            $table->unsignedInteger('idrole');
+            // $table->unsignedInteger('idrole');
             $table->enum('profil',['agent','admin']);
-            $table->boolean('isAdmin');
+            $table->boolean('isAdmin')->nullable();
             $table->timestamps();
 
 
@@ -119,8 +119,8 @@ class CreationDesTables extends Migration
                   ->references('idetablissement')->on('etablissements');
             $table->foreign('idpersonne')
                   ->references('idpersonne')->on('personnes');
-            $table->foreign('idrole')
-                  ->references('idrole')->on('roles');
+            // $table->foreign('idrole')
+                  // ->references('idrole')->on('roles');
 
 
             $table->engine = 'InnoDB';
@@ -134,9 +134,9 @@ class CreationDesTables extends Migration
             $table->unsignedInteger('idenfant');
             $table->unsignedInteger('iddeclarant');
             $table->unsignedInteger('idetablissement');
-            $table->string('cituation_matrimonial_parent');
-            $table->string('cituation_amoureuse_parent');
-            $table->string('commentaire');
+            $table->string('cituation_matrimonial_parent')->nullable();
+            $table->string('cituation_amoureuse_parent')->nullable();
+            $table->string('commentaire')->nullable();
             $table->enum('statut',[0,1,2]);
             $table->dateTime('date_envoi')->nullable();
             $table->timestamps();
@@ -162,16 +162,17 @@ class CreationDesTables extends Migration
         Schema::create('agents_communes', function (Blueprint $table) {
             $table->increments('idagents_commune');
             $table->unsignedInteger('idpersonne');
-            $table->unsignedInteger('idcommune');
+            // $table->unsignedInteger('idcommune');
             $table->string('pseudo');
             $table->string('password');
+            $table->enum('profil',['agent','admin']);
             $table->timestamps();
             
 
             $table->foreign('idpersonne')
                   ->references('idpersonne')->on('personnes');
-            $table->foreign('idcommune')
-                  ->references('idcommune')->on('communes');
+            // $table->foreign('idcommune')
+                  // ->references('idcommune')->on('communes');
 
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';

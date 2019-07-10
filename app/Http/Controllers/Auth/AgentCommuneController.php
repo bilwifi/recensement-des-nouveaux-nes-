@@ -23,7 +23,7 @@ class AgentCommuneController extends Controller
 
     protected function redirectTo()
     {
-      return route('commune.accueil');
+      return route('commune.index');
     }
     
      /**

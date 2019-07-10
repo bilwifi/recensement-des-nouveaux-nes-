@@ -12,6 +12,7 @@ use App\Models\Etablissement;
 use App\Models\Users_etablissement;
 use App\Models\Declaration;
 use App\DataTables\Etablissements\ListeNotificationsDataTable;
+use App\DataTables\Etablissements\ArchivesDataTable;
 use App\DataTables\Etablissements\ListeUtilisateursEtablissementDataTable;
 use DB;
 use Hash;
@@ -21,13 +22,16 @@ class DashboardController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware(['auth:users_etablissement','checkUserRole','checkAuth']);
+		$this->middleware(['auth:users_etablissement','checkUserRole','checkAuth','slugMiddleware']);
 	}
 
-	public function index(){
-		// dd(auth()->user()->idetablissement);
-		// dd(Etablissement::find(auth()->user()->idetablissement)->slug);
-		return redirect()->route('etablissement.accueil',Etablissement::find(auth()->user()->idetablissement)->slug);
+	public function index1(){
+		$slug = Etablissement::find(auth()->user()->idetablissement)->slug;
+		return redirect()->route('etablissement.index',$slug);
+	}
+
+	public function index(Etablissement $etablissement){
+		return view('etablissements.welcome',compact('etablissement'));
 	}
 
 	public function acceuil(Etablissement $etablissement,ListeNotificationsDataTable $dataTables){
@@ -38,6 +42,21 @@ class DashboardController extends Controller
 								])
 							->render('etablissements.acceuil');
 
+	}
+
+	public function archives(Etablissement $etablissement,ArchivesDataTable $dataTables){
+		return $dataTables->with([
+									'idetablissement' => auth()->user()->idetablissement,
+									'etablissement_slug' => $etablissement->slug,
+									'user' => auth()->user()
+								])
+							->render('etablissements.acceuil');
+
+	}
+
+	public function viewDeclaration(Etablissement $etablissement,Declaration $declaration){
+		$declaration = DeclarationController::edit($declaration->iddeclaration);
+		return view('etablissements.view_doc_naiss',compact('declaration'));
 	}
 
 	public function create_declaration(Etablissement $etablissement){

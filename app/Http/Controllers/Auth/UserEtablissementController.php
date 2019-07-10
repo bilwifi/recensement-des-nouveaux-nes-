@@ -12,7 +12,7 @@ class UserEtablissementController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/testAuth';
+    protected $redirectTo = '/';
 
     // public function __construct()
     // {
@@ -30,7 +30,7 @@ class UserEtablissementController extends Controller
 
     protected function redirectTo()
     {
-      return route('etablissement.index');
+      return route('etablissement.index1');
     }
      
     /**

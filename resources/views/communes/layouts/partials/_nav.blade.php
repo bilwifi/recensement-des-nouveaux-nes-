@@ -9,13 +9,13 @@
       {{-- MENU POUR LA COMMUNE --}}
       @auth('agents_commune')
         <li class="nav-item active">
-          <a class="nav-link" href="{{ route('commune.accueil') }}">Accueil 
+          <a class="nav-link" href="{{ route('commune.index') }}">Accueil 
 
             {{-- <span class="sr-only"></span> --}}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ ''}}">Créer</a>
+          <a class="nav-link" href="{{route('commune.create_declaration')}}">Créer</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Recherche</a>

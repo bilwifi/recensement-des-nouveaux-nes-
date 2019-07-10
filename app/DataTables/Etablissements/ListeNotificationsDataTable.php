@@ -24,10 +24,13 @@ class ListeNotificationsDataTable extends DataTable
 
 
                 return 
-                '<a href="'.route('etablissement.send_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-success '.$disable.'"><i class=" fas fa-share-square"></i></a>'
+                '<a href="'.route('etablissement.view_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-info '.$disable.'"><i class="fas fa-eye"></i></a>'
+                
                 
                 .
                 '<a href="'.route('etablissement.edit_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'"><i class="fas fa-edit"></i></a>'
+                .
+                '<a href="'.route('etablissement.send_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-success '.$disable.'"><i class=" fas fa-share-square"></i></a>'
                 .
                 '<a href="'.route('etablissement.delete_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-danger '.$disable.'"><i class=" fas fa-trash-alt"></i></a>'
                 ;
@@ -55,7 +58,7 @@ class ListeNotificationsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '150px'])
+                    ->addAction(['width' => '180px'])
                     ->parameters($this->getBuilderParameters());
     }
 

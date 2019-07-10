@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Personne;
+use App\Models\Etablissement;
 
 class Declaration extends Model
 {
@@ -39,9 +40,24 @@ class Declaration extends Model
         return $data->DeclarationByEtablissement($idetablissement)->DeclarationEtablissement()->get();
                     
     }
+
+    public static function getDeclarationByEtablissementArchive($idetablissement){
+        $data = self::getDeclaration();
+        return $data->DeclarationByEtablissement($idetablissement)
+                    ->where('statut',2)
+                    ->orWhere('statut',3)
+                    ->get();
+                    
+    }
     public static function getDeclarationByCommune(){
         $data = self::getDeclaration();
         return $data->DeclarationCommune()->get();
+                    
+    }
+
+    public static function getDeclarationByCommuneArchive(){
+        $data = self::getDeclaration();
+        return $data->where('statut',3)->get();
                     
     }
 
@@ -52,13 +68,15 @@ class Declaration extends Model
             $pere = Personne::find($declaration->idpere);
             $enfant = Personne::find($declaration->idenfant);
             $declarant = Personne::find($declaration->iddeclarant);
+            $etablissement = Etablissement::find($declaration->idetablissement);
         }
         return [
             'declaration' => $declaration,
             'mere' => isset($mere) ? $mere : null,
             'pere' => isset($pere) ? $pere : null,
             'enfant' => isset($enfant) ? $enfant : null,
-            'declarant' => isset($declarant) ? $declarant : null
+            'declarant' => isset($declarant) ? $declarant : null,
+            'etablissement' => isset($etablissement) ? $etablissement : null
         ];
                     
     }
@@ -82,6 +100,10 @@ class Declaration extends Model
 
     public static function scopeDeclarationEtablissement($query){
         return $query->where('statut',1);
+    }
+
+     public static function scopeDeclarationEtablissementArchive($query){
+        return $query->where('statut',2);
     }
 
     public static function scopeDeclarationCommune($query){

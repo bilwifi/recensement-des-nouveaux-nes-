@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
-        // \App\Http\Middleware\redirectUserToRoute::class,
+        
     ];
 
     /**
@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'checkUserRole' => \App\Http\Middleware\redirectUserToRoute::class,
         'checkAuth' => \App\Http\Middleware\checkAuthentifiacation::class,
         'checkNoAuth' => \App\Http\Middleware\checkNoAuthentifiacation::class,
+        'slugMiddleware' => \App\Http\Middleware\redirectUserToRoute::class,
     ];
 
     /**

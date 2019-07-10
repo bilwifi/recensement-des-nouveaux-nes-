@@ -35,11 +35,11 @@ class Agents_commune extends Authenticatable
 
 
     public static function getUsersByCommune($idcommune){
-        return self::UsersByCommune($idcommune)->join('personnes','personnes.idpersonne','agents_communes.idpersonne')->get();
+        return self::join('personnes','personnes.idpersonne','agents_communes.idpersonne')->get();
     } 
 
 
-    public static function scopeUsersByCommune($query,$idcommune){
-        return $query->where('idcommune',$idcommune);
-    }
+    // public static function scopeUsersByCommune($query,$idcommune){
+    //     return $query->where('idcommune',$idcommune);
+    // }
 }

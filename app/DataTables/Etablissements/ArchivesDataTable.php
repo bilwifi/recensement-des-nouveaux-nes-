@@ -1,13 +1,13 @@
 <?php
 
-namespace App\DataTables\Communes;
+namespace App\DataTables\Etablissements;
 
 use App\Models\Declaration;
 use Yajra\DataTables\Services\DataTable;
 
-class ListeNotificationsDataTable extends DataTable
+class ArchivesDataTable extends DataTable
 {
-       /**
+      /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
@@ -21,18 +21,10 @@ class ListeNotificationsDataTable extends DataTable
                 if ($this->user->profil != 'admin' && $query->iddeclarant != $this->user->idpersonne) {
                     $disable = 'disabled';
                 }
-// view_declaration
+
 
                 return 
-                '<a href="'.route('commune.view_declaration',[$query->iddeclaration]).'" class="delete-modal btn btn-info '.$disable.'"><i class="fas fa-eye"></i></a>'
-                
-                .'<a href="'.route('commune.edit_declaration',[$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'"><i class="fas fa-edit"></i></a>'
-                .
-                '<a href="'.route('commune.archive_declaration',[$query->iddeclaration]).'" class="delete-modal btn btn-success '.$disable.'"><i class="fas fa-check"></i></a>'
-                .
-                '<a href="#" class="delete-modal btn btn-danger '.$disable.'"><i class="fas fa-trash"></a>'
-                ;
-                // return null;
+                '<a href="'.route('etablissement.view_declaration',[$this->etablissement_slug,$query->iddeclaration]).'" class="delete-modal btn btn-primary '.$disable.'"><i class="fas fa-eye"></i></a>';
             });
     }
 
@@ -44,7 +36,7 @@ class ListeNotificationsDataTable extends DataTable
      */
     public function query(Declaration $model)
     {
-        return $model::getDeclarationByCommune();
+        return $model::getDeclarationByEtablissementArchive($this->idetablissement);
     }
 
     /**
@@ -57,7 +49,7 @@ class ListeNotificationsDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '180px'])
+                    ->addAction(['width' => '80px'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -69,23 +61,22 @@ class ListeNotificationsDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            // 'iddeclaration',
-            'etablissement.nom'=>[
-                        'name'=>'etablissement.nom',
-                        'data' => 'etablissement.nom',
-                        'title' => 'Etablissement',
-                        'searchable' => true,
-                        'orderable' => true,
-                        // 'render' => 'pap',
-                        'exportable' => true,
-                        'printable' => true,
-                    ],
+            // 'iddeclaration'=>[
+            //             'name'=>'lib',
+            //             'data' => 'lib',
+            //             'title' => 'Profil',
+            //             'searchable' => false,
+            //             'orderable' => false,
+            //             // 'render' => 'pap',
+            //             'exportable' => true,
+            //             'printable' => true,
+            //         ],
             'mere.nom'=>[
                         'name'=>'mere.nom',
                         'data' => 'mere.nom',
                         'title' => 'Nom de la mère',
-                        'searchable' => true,
-                        'orderable' => true,
+                        'searchable' => false,
+                        'orderable' => false,
                         // 'render' => 'pap',
                         'exportable' => true,
                         'printable' => true,
@@ -94,28 +85,28 @@ class ListeNotificationsDataTable extends DataTable
                         'name'=>'enfant.prenom',
                         'data' => 'enfant.prenom',
                         'title' => 'Prénom de l\'enfant',
-                        'searchable' => true,
-                        'orderable' => true,
+                        'searchable' => false,
+                        'orderable' => false,
                         // 'render' => 'pap',
                         'exportable' => true,
                         'printable' => true,
                     ],
-            'enfant.sexe'=>[
-                        'name'=>'enfant.sexe',
-                        'data' => 'enfant.sexe',
-                        'title' => 'Sexe',
-                        'searchable' => true,
-                        'orderable' => true,
-                        // 'render' => 'pap',
-                        'exportable' => true,
-                        'printable' => true,
-                    ],
+            // 'enfant.sexe'=>[
+            //             'name'=>'enfant.sexe',
+            //             'data' => 'enfant.sexe',
+            //             'title' => 'Sexe',
+            //             'searchable' => false,
+            //             'orderable' => false,
+            //             // 'render' => 'pap',
+            //             'exportable' => true,
+            //             'printable' => true,
+            //         ],
             'enfant.dateNaiss'=>[
                         'name'=>'enfant.dateNaiss',
                         'data' => 'enfant.dateNaiss',
                         'title' => 'Date de naissance',
-                        'searchable' => true,
-                        'orderable' => true,
+                        'searchable' => false,
+                        'orderable' => false,
                         // 'render' => 'pap',
                         'exportable' => true,
                         'printable' => true,
@@ -123,23 +114,33 @@ class ListeNotificationsDataTable extends DataTable
             'declarant.nom'=>[
                         'name'=>'declarant.nom',
                         'data' => 'declarant.nom',
-                        'title' => 'Déclarant',
+                        'title' => 'Declarant',
                         'searchable' => false,
                         'orderable' => false,
                         // 'render' => 'pap',
                         'exportable' => true,
                         'printable' => true,
                     ],
-            'date_envoi'=>[
-                        'name'=>'date_envoi',
-                        'data' => 'date_envoi',
-                        'title' => 'Date d\'envoi',
-                        'searchable' => true,
-                        'orderable' => true,
+            'created_at'=>[
+                        'name'=>'created_at',
+                        'data' => 'created_at',
+                        'title' => 'Date de création',
+                        'searchable' => false,
+                        'orderable' => false,
                         // 'render' => 'pap',
                         'exportable' => true,
                         'printable' => true,
                     ],
+             // 'statut'=>[
+             //            'name'=>'statut',
+             //            'data' => 'statut',
+             //            'title' => 'Etat',
+             //            'searchable' => false,
+             //            'orderable' => false,
+             //            // 'render' => 'pap',
+             //            'exportable' => true,
+             //            'printable' => true,
+             //        ],
         ];
     }
 
@@ -158,6 +159,6 @@ class ListeNotificationsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Communes/ListeNotifications_' . date('YmdHis');
+        return 'Etablissements/ListeNotifications_' . date('YmdHis');
     }
 }
